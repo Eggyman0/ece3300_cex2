@@ -8,12 +8,21 @@
 //
 
 module adder4(
-	      input [3:0]      a,
-	      input [3:0]      b,
+	      input  [3:0] a,
+	      input  [3:0] b,
 	      output [4:0] result);
    
 // add your code here -- you must use four instances of the full adder "fulladd", defined below
-   
+	reg [3:0] c;
+
+	always @ (*)
+		begin
+			fulladd bit0(.x(a[0]), .y(b[0]), .cin(0), .sum(result[0]), .cout(c[0]));
+			fulladd bit0(.x(a[0]), .y(b[0]), .cin(c[0]), .sum(result[1]), .cout(c[1]));
+			fulladd bit0(.x(a[0]), .y(b[0]), .cin(c[1]), .sum(result[2]), .cout(c[2]));
+			fulladd bit0(.x(a[0]), .y(b[0]), .cin(c[2]), .sum(result[3]), .cout(c[3]));
+			result[4] : c[3];
+		end
 endmodule
 
 module fulladd(
