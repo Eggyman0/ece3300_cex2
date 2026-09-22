@@ -13,16 +13,13 @@ module adder4(
 	      output [4:0] result);
    
 // add your code here -- you must use four instances of the full adder "fulladd", defined below
-	reg [3:0] c;
+	wire [2:0] c;
 
-	always @ (*)
-		begin
-			fulladd bit0(.x(a[0]), .y(b[0]), .cin(0), .sum(result[0]), .cout(c[0]));
-			fulladd bit1(.x(a[1]), .y(b[1]), .cin(c[0]), .sum(result[1]), .cout(c[1]));
-			fulladd bit2(.x(a[2]), .y(b[2]), .cin(c[1]), .sum(result[2]), .cout(c[2]));
-			fulladd bit3(.x(a[3]), .y(b[3]), .cin(c[2]), .sum(result[3]), .cout(c[3]));
-			result[4] : c[3];
-		end
+	fulladd bit0(.x(a[0]), .y(b[0]), .cin(0), .sum(result[0]), .cout(c[0]));
+	fulladd bit1(.x(a[1]), .y(b[1]), .cin(c[0]), .sum(result[1]), .cout(c[1]));
+	fulladd bit2(.x(a[2]), .y(b[2]), .cin(c[1]), .sum(result[2]), .cout(c[2]));
+	fulladd bit3(.x(a[3]), .y(b[3]), .cin(c[2]), .sum(result[3]), .cout(result[4]));
+
 endmodule
 
 module fulladd(
